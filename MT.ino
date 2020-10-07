@@ -20,36 +20,36 @@
 //Address lines for chip A and B will be connected together
 //we can use the chipSelect lines to decide which chip to update
 /*
-The pinout for the dev board
-Left side control lines (top to bottom)
+  The pinout for the dev board
+  Left side control lines (top to bottom)
 
-Chip Select A
-DATa A
-STroBe A
-ReSeT
-Chip Select B
-DATa B
-STroBe B
-VDD +
-VSS GND
-VEE -
+  Chip Select A
+  DATa A
+  STroBe A
+  ReSeT
+  Chip Select B
+  DATa B
+  STroBe B
+  VDD +
+  VSS GND
+  VEE -
 
-Bottom address lines (left to right)
+  Bottom address lines (left to right)
 
-Y0 A
-Y1 A
-Y2 A
-X0 A
-X1 A
-X2 A
-X3 A
-Y0 B
-Y1 B
-Y2 B
-X0 B
-X1 B
-X2 B
-X3 B
+  Y0 A
+  Y1 A
+  Y2 A
+  X0 A
+  X1 A
+  X2 A
+  X3 A
+  Y0 B
+  Y1 B
+  Y2 B
+  X0 B
+  X1 B
+  X2 B
+  X3 B
 
 */
 
@@ -66,13 +66,18 @@ int Y = 0;
 
 int comma = -1;
 
+int stayInConnectionMenu = 0;   //if this is 1, it skips the menu so we can keep adding connections
 
 const byte bufLength = 8;
-
 
 char serialBuffer[bufLength];
 char serialBufferX[bufLength];
 char serialBufferY[bufLength];
+
+char connectionsChip[100]; //stores which chip each connection was made on
+int connectionsX [100];   //
+int connectionsY [100];   //these should match each other by index so connectionsX[0][5] should be connected to connectionsY[0][5]
+int connIndex = 0; //this stores the index of last position (we only need one because X and Y should be the same)
 
 void setup() {
 
@@ -116,35 +121,119 @@ void setup() {
 
 
 void loop() {
+  clearBuffers();
+  if (stayInConnectionMenu == 1) {
+    getX();
+  } else {
 
-  Serial.println("Connect X [0-15] to Y [0-7]");
-  
-  getX();           
+    showMenuOptions();
+    selectMenuItem();
+  }
 
-  setAddress(Xaddr,Yaddr,chip); //these are all global variables and nothing in the function changes their value but I'm passing them anyway
-  
-  Serial.println("Cool\n");
+
+  //Serial.print("Cool\n");
 
 }
 
+void showMenuOptions(void) {
 
-void getX() {     //this is just to get values from the serial monitor (which isnt a particularly nice way to set the switches)
-//                  dealing with inputs to the serial monitor is almost always a shit show, as you will see below
+  //Serial.println(" ");
+  Serial.print("Select Chip \t\ta/b\t Currently ");
+  Serial.println(chip);
+  Serial.println("Connect Nodes \t\tc");
+  Serial.println("Show Connections \ts");
+  Serial.println("Reset Connections\tr");
+  Serial.println("Back to Menu\t\tm");
+  Serial.println(" ");
+
+
+}
+
+void selectMenuItem(void) {
+
+
+  while (!Serial.available());    //this just keeps looping if there's nothing in the serial buffer, so it waits for you choose an item
 
   for (int i = 0; i < bufLength; i++) {   //clears the serial buffers by filling them with spaces
     serialBuffer[i] = ' ';
-    serialBufferX[i] = ' ';
-    serialBufferY[i] = ' ';
   }
+  Serial.readBytesUntil('\n', serialBuffer, bufLength);
 
-  Serial.print("X = ");
+  switch (tolower(serialBuffer[0])) {
+
+    case 'c':
+      stayInConnectionMenu = 1;
+      getX();
+      break;
+
+    case 'r':
+      clearConnections();
+      Serial.println ("Cleared!\n");
+      break;
+
+    case 'a':
+      chip = 'A';
+      break;
+
+    case 'b':
+      chip = 'B';
+      break;
+
+    case 's':
+      showConnections();
+
+      break;
+  }
+  clearBuffers();
+}
+
+
+
+void getX() {     //this is just to get values from the serial monitor (which isnt a particularly nice way to set the switches)
+  //                  dealing with inputs to the serial monitor is almost always a shit show, as you will see below
+
+  Serial.print("Connect X [0-15] to Y [0-7] on chip ");
+  Serial.println(chip);
+  clearBuffers();
+
+  int shift = 0;
+
   while (!Serial.available());    //this just keeps looping if there's nothing in the serial buffer, so it waits for you to send some data
 
   Serial.readBytesUntil('\n', serialBuffer, bufLength); //reads chars one at a time and puts them into the array serialBuffer
-//                                                        until it reads an \n or it reaches the end (bufLength)
+  //                                                        until it reads an \n or it reaches the end (bufLength)
+  if (isDigit(serialBuffer[0]) != true) {
 
-  for (int i = 0; i < bufLength; i++) {  //this loop lets is enter values as "X,Y" instead of one at a time (it was super annoying to do it that way when testing)
-//                                         by taking one serialBuffer and then splitting it into separate X and Y serialBuffers
+
+    switch (tolower(serialBuffer[0])) {
+      case 'm':
+        Serial.println("\n");
+        stayInConnectionMenu = 0;
+        return;
+
+      case'a':
+        chip = 'A';
+        Serial.println("Switched to chip A");
+        shift++;
+        break;
+
+      case'b':
+        chip = 'B';
+        Serial.println("Switched to chip B");
+        shift++;
+        break;
+
+      default:
+        Serial.println ("\nPlease enter a number");
+        return;
+    }
+  }
+
+  comma = -1;
+
+  for (int i = shift; i < bufLength; i++) {  //this loop lets is enter values as "X,Y" instead of one at a time (it was super annoying to do it that way when testing)
+    //                                         by taking one serialBuffer and then splitting it into separate X and Y serialBuffers
+
     if (serialBuffer[i] == ',') {     //loops through serialBuffer[] to look for a comma and sets "comma" to the position in the array
       comma = i;
       i++;
@@ -156,7 +245,6 @@ void getX() {     //this is just to get values from the serial monitor (which is
       serialBufferY[i] = serialBuffer[i]; //if it has, then it start putting them into the Y address buffer
     }
   }
-
 
   int incomingValueX = atoi(serialBufferX);   //atoi converts a char array to an integer (Array TO Int)
   int incomingValueY = atoi(serialBufferY);
@@ -174,31 +262,38 @@ void getX() {     //this is just to get values from the serial monitor (which is
 
   Xaddr = atoi(serialBufferX);  //now that we know our inputs are good, we can put them into Xaddr and Yaddr
   Yaddr = atoi(serialBufferY);
-
-  Serial.println(Xaddr); 
+  Serial.print("X = ");
+  Serial.println(Xaddr);
 
   if (comma > 0) {          //only prints a Y if you entered it here
     Serial.print("Y = ");
     Serial.println(Yaddr);
+    Serial.println(' ');
   }
 
-  Serial.println(' ');    //gives us some breathing room in the serial monitor output
-  
+  //Serial.println(' ');    //gives us some breathing room in the serial monitor output
+
   if (comma < 0) {        //if a Y wasnt entered comma will still be -1, call getY() to ask for one
-     comma = -1;          //set the comma back to -1 for the next entry
-     getY(); 
+    comma = -1;          //set the comma back to -1 for the next entry
+    getY();
   }
- 
+
+  connectionsX[connIndex] = Xaddr;
+  connectionsY[connIndex] = Yaddr;
+  connectionsChip[connIndex] = chip;
+  connIndex++;
+
+  setAddress(Xaddr, Yaddr, chip); //these are all global variables and nothing in the function changes their value but I'm passing them anyway
 }
 
 void getY() {
 
   Serial.print("Y = ");           //so you don't forget what you were doing
-  
+
   while (!Serial.available());    //this just keeps looping if there's nothing in the serial buffer, so it waits for you to send some data
 
   Serial.readBytesUntil('\n', serialBufferY, bufLength);    //reads chars one at a time and puts them into the array serialBuffer
-//                                                            until it reads an \n or it reaches the end (bufLength)
+  //                                                            until it reads an \n or it reaches the end (bufLength)
 
   int incomingValue = atoi(serialBufferY);    //Array to int
   if (incomingValue >= Ysize) {               //bounds checking
@@ -207,11 +302,9 @@ void getY() {
     return;
   }
 
-  while (Serial.available() > 0) {    //this is just a trick to clear the serial buffer (if we typed in a really long string it would just keep entering them one after another)
-    Serial.read();                    //it reads the serial buffer and then throws away the values, just to clear it
-  }
+  Yaddr = atoi(serialBufferY);      //put our Y input as an integer into Yaddr
 
-  Yaddr = atoi(serialBufferY);      //put our Y input as an integer into Yaddr 
+  clearBuffers();
 
   Serial.println(Yaddr);
   Serial.println(' ');
@@ -272,8 +365,6 @@ void strobeItIn (char chip) {
     delayMicroseconds(30);
   }
 
-
-
 }
 
 void selectChip (char chip)  {        //asserts whichever chip select line we send it
@@ -295,12 +386,11 @@ void deselectChip (void)  {         //this should be fairly obvious
   return;
 }
 
-
 void clearConnections (void)  {    //when you send a reset pulse, all previous connections are cleared on whichever chip is chipSelected but we'll do both for now
-  
+
   digitalWrite(chipSelectA, HIGH);
   digitalWrite(chipSelectB, HIGH);
-  
+
   digitalWrite(rst, HIGH);
   delayMicroseconds(10);     //datasheet says 40 nanoseconds minimum, this is a lot more than that
   digitalWrite(rst, LOW);
@@ -308,4 +398,81 @@ void clearConnections (void)  {    //when you send a reset pulse, all previous c
   digitalWrite(chipSelectA, LOW);
   digitalWrite(chipSelectB, LOW);
 
+
+  for (int i = connIndex; i > 0; i--) {
+    connectionsX[i] = -1;         //just making them -1 so they arent confused with 0s that are supposed to be there
+    connectionsY[i] = -1;
+  }
+  connIndex = 0;
+
+}
+
+void clearBuffers (void) {
+  
+  for (int i = 0; i < bufLength; i++) {   //clears the serial buffers by filling them with spaces
+    serialBuffer[i] = ' ';
+    serialBufferX[i] = ' ';
+    serialBufferY[i] = ' ';
+  }
+
+  /* while (Serial.available() > 0) {    //this is just a trick to clear the serial buffer (if we typed in a really long string it would just keep entering them one after another)
+     Serial.print(Serial.read());                    //it reads the serial buffer and then throws away the values, just to clear it
+     delay(100);
+    }*/
+  Serial.end();         //maybe it's just easier to stop and start the serial connection
+  Serial.begin(9600);
+
+}
+
+void showConnections (void) {   //shows a list of connections that are currently on
+
+  int tmpConnAX[100];
+  int tmpConnAY[100];
+  int indexA = 0;
+
+  int tmpConnBX[100];
+  int tmpConnBY[100];
+  int indexB = 0;
+
+  for (int i = 0; i < connIndex; i++) {   //splits connectionsX and Y arrays into 2 temp arrays for each chip
+    if (connectionsChip[i] == 'A') {
+      tmpConnAX[indexA] = connectionsX[i];
+      tmpConnAY[indexA] = connectionsY[i];
+      indexA++;
+    } else if (connectionsChip[i] == 'B') {
+      tmpConnBX[indexB] = connectionsX[i];
+      tmpConnBY[indexB] = connectionsY[i];
+      indexB++;
+    }
+  }
+
+  int max = (indexA > indexB) ? indexA : indexB; //finds the larger one so we know how many columns to print
+  // Serial.println(max);
+  // Serial.println(indexA);
+  // Serial.println(indexB);
+  Serial.println("\t Chip A\t\t\t Chip B");
+
+  for (int i = 0; i < max; i++) {
+    if (indexA > 0) {
+      indexA--;
+      Serial.print("\tX");
+      Serial.print(tmpConnAX[indexA]);
+      Serial.print(" to Y");
+      Serial.print(tmpConnAY[indexA]);
+
+    } else {
+      Serial.print("\t\t");
+    }
+    if (indexB > 0) {
+      indexB--;
+      Serial.print("\t\tX");
+      Serial.print(tmpConnBX[indexB]);
+      Serial.print(" to Y");
+      Serial.print(tmpConnBY[indexB]);
+
+    }
+    Serial.println("");
+
+  }
+  Serial.println("");
 }
