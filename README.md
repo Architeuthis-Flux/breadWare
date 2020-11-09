@@ -41,3 +41,4 @@ Here's the table I used to figure out which chips are connected where, and this 
 One day we will have this piece of paper framed and signed by JJ.
 ![Screenshot](JJConceptInterconnects.jpeg)
 
+![](https://komarev.com/ghpvc/?username=Architeuthis-Flux&color=grey)
