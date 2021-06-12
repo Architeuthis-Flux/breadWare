@@ -80,23 +80,31 @@ In the near future I intend to make a full blown GUI for this, because that's th
 Here are some screenshots the interface:
 
 Connecting Nodes
+
 <img width="511" alt="Screen Shot 2021-06-11 at 4 58 42 PM" src="https://user-images.githubusercontent.com/20519442/121670695-4c81eb80-cae0-11eb-837f-d2716257b874.png">
 
 Disconnecting Nodes
+
 <img width="536" alt="Screen Shot 2021-06-11 at 4 57 02 PM" src="https://user-images.githubusercontent.com/20519442/121671306-f6fa0e80-cae0-11eb-80f4-6cc81e22b78a.png">
 
-
-
 Turning on the power supplies
+
 ![Screen Shot 2021-06-11 at 5 00 05 PM](https://user-images.githubusercontent.com/20519442/121670839-76d3a900-cae0-11eb-8140-a3e641796f26.png)
 
 Using the potentiometer
+
 ![Screen Shot 2021-06-11 at 5 03 24 PM](https://user-images.githubusercontent.com/20519442/121670934-8d7a0000-cae0-11eb-9c04-dff28cab8096.png)
 
 Showing the frontend connections you've made
+
 ![Screen Shot 2021-06-11 at 5 04 14 PM](https://user-images.githubusercontent.com/20519442/121671034-aaaece80-cae0-11eb-97e7-26575fdda108.png)
 
 Showing the backend (chip to chip) connections 
+
 ![Screen Shot 2021-06-11 at 5 04 45 PM](https://user-images.githubusercontent.com/20519442/121671140-c9ad6080-cae0-11eb-9881-4a8735643b8f.png)
+
+
+
+
 
 ## [Here's the documentation for v0.1](breadWare/v0.1-alpha/)
