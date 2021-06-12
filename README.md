@@ -99,4 +99,4 @@ Showing the frontend connections you've made
 Showing the backend (chip to chip) connections 
 ![Screen Shot 2021-06-11 at 5 04 45 PM](https://user-images.githubusercontent.com/20519442/121671140-c9ad6080-cae0-11eb-9881-4a8735643b8f.png)
 
-##[Here's the documentation for v0.1](breadWare/v0.1-alpha/)
+## [Here's the documentation for v0.1](breadWare/v0.1-alpha/)
