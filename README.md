@@ -1,7 +1,7 @@
 # breadWare v0.2
 
 
-Here's the second board revision. I was showing the last version off to someone and they offhandedly mentioned that it would be cool if the whole thing fit under the breadboard. I knew this was my plan all along, but it forced me to finally design it before the code gets too specific to the original off-the-cuff design and I get stuck with my poor ~~life~~ design choices. 
+Here's the second board revision. I was showing the [last version](breadWare/v0.1-alpha/) off to someone and they offhandedly mentioned that it would be cool if the whole thing fit under the breadboard. I knew this was my plan all along, but it forced me to finally design it before the code gets too specific to the original off-the-cuff design and I get stuck with my poor ~~life~~ design choices. 
 
 ## Matrix Board Changes
 
@@ -99,4 +99,4 @@ Showing the frontend connections you've made
 Showing the backend (chip to chip) connections 
 ![Screen Shot 2021-06-11 at 5 04 45 PM](https://user-images.githubusercontent.com/20519442/121671140-c9ad6080-cae0-11eb-9881-4a8735643b8f.png)
 
-
+##[Here's the documentation for v0.1](breadWare/v0.1-alpha/)
