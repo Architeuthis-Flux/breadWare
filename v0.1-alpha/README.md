@@ -1,3 +1,5 @@
+
+
 # breadWare v0.1
 
 
@@ -48,4 +50,16 @@ Here's the table I used to figure out which chips are connected where, and this 
 One day we will have this piece of paper framed and signed by JJ.
 ![JJConceptInterconnects](https://user-images.githubusercontent.com/20519442/121768440-cc678e80-cb90-11eb-9771-6e6a080430c7.jpeg)
 
-![](https://komarev.com/ghpvc/?username=Architeuthis-Flux&color=grey)
+
+Here are some pictures of both boards after assembly:
+
+That green board hanging off is 2 charge pumps in parallel (for added current handling, but it was probably unnecessary) and an LM337 Negative Voltage Regulator. I built that because the power rails weren't working until I realized I swapped Vss and Vee.
+![v0 1_Assembled_4](https://user-images.githubusercontent.com/20519442/122186965-25049780-cec1-11eb-8e58-be1571bfea7d.jpg)
+![v0 1_Assembled_3](https://user-images.githubusercontent.com/20519442/122186988-2df56900-cec1-11eb-843a-d8bc05217108.JPG)
+
+![v0 1_Assembled_1](https://user-images.githubusercontent.com/20519442/122186980-2afa7880-cec1-11eb-88e8-ad838d916f46.JPG)
+![v0 1_Assembled_2](https://user-images.githubusercontent.com/20519442/122186983-2c2ba580-cec1-11eb-898d-ec9fff4cafa0.JPG)
+
+
+
+
