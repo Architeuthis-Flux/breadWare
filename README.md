@@ -116,10 +116,21 @@ Showing the backend (chip to chip) connections
 ![Screen Shot 2021-06-11 at 5 04 45 PM](https://user-images.githubusercontent.com/20519442/121671140-c9ad6080-cae0-11eb-9881-4a8735643b8f.png)
 
 
-
+Here are some extra glamour shots:
 ![bW!_RB67_9_crop](https://user-images.githubusercontent.com/20519442/122180914-714cd900-cebb-11eb-8db1-241325a87e49.jpg)
 
 ![bW!_RB67_10_crop](https://user-images.githubusercontent.com/20519442/122180921-71e56f80-cebb-11eb-863c-dbd7315082e3.jpg)
+
+![v0 2_4_Crop](https://user-images.githubusercontent.com/20519442/122180933-7578f680-cebb-11eb-8975-d292ab00c78f.jpg)
+![v0 2_5_Crop](https://user-images.githubusercontent.com/20519442/122180936-76aa2380-cebb-11eb-9fdf-90d3dac39065.jpg)
+
+
+mmmmmm melty traces
+<img width="915" alt="v0 2_PCB_3" src="https://user-images.githubusercontent.com/20519442/122190648-972aab80-cec4-11eb-8c95-bede2d3faa1e.PNG">
+<img width="837" alt="v0 2_PCB_8" src="https://user-images.githubusercontent.com/20519442/122190668-9c87f600-cec4-11eb-9f00-5649f02926d6.PNG">
+
+
+
 
  > btw most of these photos were taken on Lomochrome Metropolis with a Mamiya RB67
  > the two showing the boards separately were taken with an Intrepid 4x5 on cross-processed Provia 100f
@@ -130,5 +141,4 @@ Showing the backend (chip to chip) connections
 ![v0 2_v0 1_Compare_2](https://user-images.githubusercontent.com/20519442/122179872-7a897600-ceba-11eb-8cff-c0f62a2d6236.jpg)
 
 
-![v0 2_4_Crop](https://user-images.githubusercontent.com/20519442/122180933-7578f680-cebb-11eb-8975-d292ab00c78f.jpg)
-![v0 2_5_Crop](https://user-images.githubusercontent.com/20519442/122180936-76aa2380-cebb-11eb-9fdf-90d3dac39065.jpg)
+
