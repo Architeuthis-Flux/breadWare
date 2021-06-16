@@ -1,5 +1,6 @@
 # breadWare v0.2
 
+![bW!_RB67_5_crop](https://user-images.githubusercontent.com/20519442/122180904-6f831580-cebb-11eb-9e1e-ec45c06269b9.jpg)
 
 Here's the second board revision. I was showing the [last version](breadWare/v0.1-alpha/) off to someone and they offhandedly mentioned that it would be cool if the whole thing fit under the breadboard. I knew this was my plan all along, but it forced me to finally design it before the code gets too specific to the original off-the-cuff design and I get stuck with my poor ~~life~~ design choices. 
 
@@ -29,7 +30,7 @@ Because I'm going to such great lengths to make everything analog, and I already
 
 Also, the range of voltages available to each of the 4 rails is fixed. Next revision might include some way to multiplex the power rails (allowing any of them to be negative, right now only the bottom negative rail can do that and it can be changed with a solder jumper) but having looked into it for a while, there doesn't seem to be a way to do it simply enough to outweigh the small utility gained from it. If anyone knows a better way to do this, let me know.
 
-I'm using an [LT1054](https://www.ti.com/lit/ds/symlink/lt1054.pdf?ts=1623386605661&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FLT1054%253Futm_source%253Dgoogle%2526utm_medium%253Dcpc%2526utm_campaign%253Dapp-null-null-GPN_EN-cpc-pf-google-sa%2526utm_content%253DLT1054%2526ds_k%253DLT1054%2526DCM%253Dyes%2526gclid%253DCj0KCQjw8IaGBhCHARIsAGIRRYqazWa1HYDDSNdHtIH7dqU-yqDqCnm6CfqRnDNBBC_sS4i2s7MQtgcaAuJ-EALw_wcB%2526gclsrc%253Daw.ds) switched capacitor bipolar voltage converter that takes in +5V and doubles it to +10V and also flips that to -10V. That powers the MT8816s directly and the op amps I'm using for the adjustable voltage supplies. The previous board used inductors for that, and aside from the electrical noise, you could hear them running. I know the frequency they run at is way higher than 20kHz but they must have been resonating with something (or I'm actually part bat) because it was super annoying.
+I'm using an [LT1054](https://www.ti.com/lit/ds/symlink/lt1054.pdf) switched capacitor bipolar voltage converter that takes in +5V and doubles it to +10V and also flips that to -10V. That powers the MT8816s directly and the op amps I'm using for the adjustable voltage supplies. The previous board used inductors for that, and aside from the electrical noise, you could hear them running. I know the frequency they run at is way higher than 20kHz but they must have been resonating with something (or I'm actually part bat) because it was super annoying.
 
 The way I decided to make an adjustable supply that can be controlled by the mcu might be really dumb, but so far it seems to work. I didn't find any well documented examples of people doing it this way, so I'd love to hear from anyone who has or has a good reason why it will cause problems. 
 
@@ -37,14 +38,16 @@ I used an [MCP4728](http://ww1.microchip.com/downloads/en/devicedoc/22187e.pdf) 
 
 What's cool about this setup is that the DAC is fast enough to use this whole circuit as a DDS function generator. That's why I put solder jumpers to disconnect all the bypass caps. I haven't written the code to try this out yet though. 
 
+![v0 2_Back](https://user-images.githubusercontent.com/20519442/122179843-75c4c200-ceba-11eb-90d4-0fd8ad5f7d59.jpg)
+
 ### Special Functions
 
 On the control board there's another 8x16 crosspoint switch that I'm using to multiplex the 8 passthrough connections (1 per chip on the top matrix board, but only 4 of them aren't connected to a breadboard pin) to the special functions on the bottom control board. 
 
 The special functions are (a checkmark means the firmware is written enough to use it):
- [  ] 2 ADC channels that can be read by the microcontroller 
+ [ ] 2 ADC channels that can be read by the microcontroller 
  [x] 2 digital potentiometer channels using an [MCP4661](https://ww1.microchip.com/downloads/en/DeviceDoc/22107B.pdf) 
- [  ] 5 GPIO pins directly connected to the [ATmega4809](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega4808-4809-Data-Sheet-DS40002173A.pdf)
+ [ ] 5 GPIO pins directly connected to the [ATmega4809](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega4808-4809-Data-Sheet-DS40002173A.pdf)
  [x] 2 adjustable power supply channels (0 - 5V, 0 - -8V)
  [x] 1 ground
 
@@ -65,8 +68,11 @@ Also, if anyone from Dangerous Prototypes is reading this; I'm dying for updates
 
 On each corner of the board I put a 2x2 header so you can connect these side-by-side and make these into longer board. They communicate via UART with Tx Rx in at the top left and Tx Rx out at the top right. The bottom corners have the 4 unconnected pins from the top matrix on both sides. So you could use these to make connections from one board to the other. As it is currently, having only 4 of these general purpose matrix connections is a huge bottleneck for doing just about anything so I probably need to come up with a way to have more of these free pins in the next revision. 
 
+
 To communicate with the computer, I'm using an [MCP2221A](http://ww1.microchip.com/downloads/en/devicedoc/20005565b.pdf) to talk to the mcu via a dedicated UART. That chip is also connected to the I2C lines but I'm not sure what I'm going to use that for, maybe I'll have the I2C traffic passed along in some sort of debug mode. It also can send a reset signal from one of it's 4 GPIO lines to the ATmega4809 (with a solder jumper in case that causes problems), which notably is a missing feature of this chip. 
 I could pretend that my choice to to use this was some principled stand against FTDI to cover for the fact that I actually don't remember why I chose this over and FTDI232.
+
+![bW!_RB67_6](https://user-images.githubusercontent.com/20519442/122179822-70677780-ceba-11eb-847c-b5009a813903.jpg)
 
 ## Making It Do Stuff
 
@@ -77,7 +83,13 @@ Making connections on the board just requires you to type in the two rows you wa
 
 In the near future I intend to make a full blown GUI for this, because that's the part that will make this thing actually make your life easier.
 
+
+
+![bW!_RB67_3_crop](https://user-images.githubusercontent.com/20519442/122180876-6abe6180-cebb-11eb-8b42-184f7e1ed9df.jpg)
+
+
 Here are some screenshots the interface:
+
 
 Connecting Nodes
 
@@ -105,6 +117,18 @@ Showing the backend (chip to chip) connections
 
 
 
+![bW!_RB67_9_crop](https://user-images.githubusercontent.com/20519442/122180914-714cd900-cebb-11eb-8db1-241325a87e49.jpg)
 
+![bW!_RB67_10_crop](https://user-images.githubusercontent.com/20519442/122180921-71e56f80-cebb-11eb-863c-dbd7315082e3.jpg)
+
+ > btw most of these photos were taken on Lomochrome Metropolis with a Mamiya RB67
+ > the two showing the boards separately were taken with an Intrepid 4x5 on cross-processed Provia 100f
+ > you can download ridiculously huge scans of these (or my non-documentation related photos) from my [Flickr](https://www.flickr.com/photos/arabidsquid/)
 
 ## [Here's the documentation for v0.1](breadWare/v0.1-alpha/)
+![v0 2_v0 1_Compare_1](https://user-images.githubusercontent.com/20519442/122179854-778e8580-ceba-11eb-96a5-e22877d94470.jpg)
+![v0 2_v0 1_Compare_2](https://user-images.githubusercontent.com/20519442/122179872-7a897600-ceba-11eb-8cff-c0f62a2d6236.jpg)
+
+
+![v0 2_4_Crop](https://user-images.githubusercontent.com/20519442/122180933-7578f680-cebb-11eb-8975-d292ab00c78f.jpg)
+![v0 2_5_Crop](https://user-images.githubusercontent.com/20519442/122180936-76aa2380-cebb-11eb-9fdf-90d3dac39065.jpg)
