@@ -1,10 +1,12 @@
-# breadWare v0.2
-
+# breadWare v0.2 
+#### [Here's a link to the Hackaday.io project page](https://hackaday.io/project/180394-breadware)
 ![bW!_RB67_5_crop](https://user-images.githubusercontent.com/20519442/122180904-6f831580-cebb-11eb-9e1e-ec45c06269b9.jpg)
 
-Here's the second board revision. I was showing the [last version](breadWare/v0.1-alpha/) off to someone and they offhandedly mentioned that it would be cool if the whole thing fit under the breadboard. I knew this was my plan all along, but it forced me to finally design it before the code gets too specific to the original off-the-cuff design and I get stuck with my poor ~~life~~ design choices. 
+My reason for doing this whole writeup and putting this out there is to hopefully find some fellow hackers who are equally stoked on breadWare and want to help make it into something where people will wonder how the hell they built anything before it existed (probably not Arduino levels of disruption, but when I need to use a Bus Pirate, I can't even imagine the horrible dystopian hellscape the world would be without it.) At least for me, placing jumpers messes up my flow, because there's always that angel on one shoulder telling me to be methodical: cut my jumpers to the right length, make nice 90° bends, use colors consistently, while the demon on the other shoulder says to just get the damn thing working now and let future me deal with the mess. The demon always wins, so I'd really like the angel to shut up, it's distracting. So offloading that internal debate to a computer seems like a good idea [disclaimer: do not run this on a HAL 9000 computer, I hear cognitive dissonance like this can cause undefined behavior]
 
-## Matrix Board Changes
+So here's the second board revision. I was showing the [last version](breadWare/v0.1-alpha/) off to someone and they offhandedly mentioned that it would be cool if the whole thing fit under the breadboard. I knew this was my plan all along, but it forced me to finally design it before the code gets too specific to the original off-the-cuff design and I get stuck with my poor ~~life~~ design choices. 
+
+## Matrix Board
 
 ![2021-06-10-0002-3](https://user-images.githubusercontent.com/20519442/121673097-24e05280-cae3-11eb-87dd-462c0c393a41.jpg)
 
@@ -16,7 +18,7 @@ I changed the logical arrangement of the [MT8816](https://www.futurlec.com/Datas
 
 And just to add some glam I added some reverse mounted LEDs that shine through the top and bottom power rails to show when that rail's power supply is on.
 
-## Control Board Changes
+## Control Board
 
 ![2021-06-10-0001-3](https://user-images.githubusercontent.com/20519442/121673107-2742ac80-cae3-11eb-9ab2-53451da856ce.jpg)
 
