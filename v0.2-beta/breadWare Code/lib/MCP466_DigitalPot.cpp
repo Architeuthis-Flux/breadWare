@@ -52,7 +52,9 @@ void MCP466_DigitalPot::mcpWrite(byte Register, word Value)
   tempWord &= 0x00FF;              // Clear the top byte
   secondCommandByte = byte(tempWord);  // Store the lower byte of the input value in the secondCommandByte
 
-  
+  Serial.print (firstCommandByte, HEX);
+  Serial.print ("\t");
+  Serial.println (secondCommandByte, HEX);
   // Write to the digital potentiometer
   Wire.beginTransmission(_ChipAddress_7bit);   // Begin the I2C transmission
   Wire.write(firstCommandByte);                // Queue up the firstCommandByte

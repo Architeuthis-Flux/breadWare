@@ -66,11 +66,30 @@
 #define I2C_SDA PIN_PA2
 #define I2C_SCL PIN_PA3
 
+#define POT_MAX 100
 
-#define mcpAddress         0x2F
+#define mcpAddress         0x28
 #define volatileWiper0     0x00
 #define volatileWiper1     0x01
 #define nonvolatileWiper0  0x02
 #define nonvolatileWiper1  0x03
 #define TCON               0x04
 #define mcpSTATUS          0x05 
+
+
+#define ADC0 0
+#define ADC1 1
+#define POT0_A 2
+#define POT0_W 3
+#define POT0_B 4
+#define POT1_A 5
+#define POT1_W 6
+#define POT1_B 7
+#define PC0 8
+#define PC1 9
+#define PC2 10
+#define PC3 11
+#define PE3 12
+#define POS_TOP_MT 13
+#define NEG_BOTTOM_MT 14
+#define GROUND_MT 15
