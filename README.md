@@ -1,3 +1,10 @@
+# Jumperless
+
+### I've changed this project's name for version 3
+The code and KiCAD files for the most recent revision are in the Jumperless folder. When I do a thorough writeup I may make an entirely new repo just so everythings stays clean. But for now, here's the new board and GUI 
+![IMG_1835 Large](https://user-images.githubusercontent.com/20519442/200686632-774f66b3-27b1-4962-8f14-b23651c42c2e.jpeg)
+
+
 # breadWare v0.2 
 #### [Here's a link to the Hackaday.io project page](https://hackaday.io/project/180394-breadware)
 ![bW!_RB67_5_crop](https://user-images.githubusercontent.com/20519442/122180904-6f831580-cebb-11eb-9e1e-ec45c06269b9.jpg)
