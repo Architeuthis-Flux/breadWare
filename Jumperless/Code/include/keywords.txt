@@ -1,0 +1,5 @@
+MCP466_DigitalPot	KEYWORD1
+mcpWrite	KEYWORD2
+mcpRead	KEYWORD2
+mcpUp	KEYWORD2
+mcpDown	KEYWORD2
