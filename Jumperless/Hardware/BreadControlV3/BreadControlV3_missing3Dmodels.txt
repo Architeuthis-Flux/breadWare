@@ -1,0 +1,13 @@
+### Missing 3D models - created on 2022-07-20 20:43
+### Printed by checking_3D_models plugin
+Board file: /Users/kevinsanto/Desktop/BreadWare/breadWareV3/BreadControlV3/BreadControlV3.kicad_pcb
+3D missing models written to:
+/Users/kevinsanto/Desktop/BreadWare/breadWareV3/BreadControlV3/BreadControlV3_missing3Dmodels.txt
+-------
+('U3', '/Applications/KiCad/KiCad.app/Contents/SharedSupport/3dmodels/Package_DFN_QFN.3dshapes/VQFN-64-1EP_9x9mm_P0.5mm_EP7.15x7.15mm.wrl')
+('J4', '/Applications/KiCad/KiCad.app/Contents/SharedSupport/3dmodels/Connector_USB.3dshapes/USB_Mini-B_Wuerth_65100516121_Horizontal.wrl')
+('J5', '/Applications/KiCad/KiCad.app/Contents/SharedSupport/3dmodels/Package_LCC.3dshapes/PLCC-44_16.6x16.6mm_P1.27mm.wrl')
+('I1', '/Applications/KiCad/KiCad.app/Contents/SharedSupport/3dmodels/Package_LCC.3dshapes/PLCC-44_16.6x16.6mm_P1.27mm.wrl')
+-------
+NUM of 3D missing models:4
+checked extensions ['.stp', '.step', '.stpZ']
